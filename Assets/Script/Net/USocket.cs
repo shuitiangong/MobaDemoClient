@@ -78,9 +78,12 @@ namespace Game.Net
                 {
                     //反序列化
                     BufferEntity bufferEntity = new BufferEntity(data.RemoteEndPoint, data.Buffer);
-                    Debug.Log($"处理消息,id:{bufferEntity.messageID}");
-                    //处理业务逻辑
-                    local.Handle(bufferEntity);
+                    if (bufferEntity.isFull)
+                    {
+                        Debug.Log($"处理消息,id:{bufferEntity.messageID}");
+                        //处理业务逻辑
+                        local.Handle(bufferEntity);
+                    }
                 }
             }
         }

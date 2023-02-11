@@ -21,6 +21,7 @@ namespace Game.Net
         public byte[] proto; //业务报文
 
         public byte[] buffer; //最终要发送的数据或者是收到的数据
+        public bool isFull = false; //报文是否完整
 
         /// <summary>
         /// 构建请求报文
@@ -76,8 +77,11 @@ namespace Game.Net
         //编码的接口 byte[] ACK确认报文或业务报文
         public byte[] Encoder(bool isAck)
         {
+            if (isAck)
+            {
+                protoSize = 0;
+            }
             byte[] data = new byte[32 + protoSize];
-
             byte[] _length = BitConverter.GetBytes(protoSize);
             byte[] _session = BitConverter.GetBytes(session);
             byte[] _sn = BitConverter.GetBytes(sn);
@@ -110,7 +114,22 @@ namespace Game.Net
         //将报文反序列化成成员
         private void DeCode()
         {
+            if (buffer.Length < 4)
+            {
+                isFull = false;
+                return;
+            }
+
             protoSize = BitConverter.ToInt32(buffer, 0);
+            if (buffer.Length == protoSize + 32)
+            {
+                isFull = true;
+            }
+            else
+            {
+                isFull = false;
+                return;
+            }
             session = BitConverter.ToInt32(buffer, 4);
             sn = BitConverter.ToInt32(buffer, 8);
             moduleID = BitConverter.ToInt32(buffer, 12);

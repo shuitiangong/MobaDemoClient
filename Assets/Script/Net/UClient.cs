@@ -20,7 +20,7 @@ namespace Game.Net
         int overtime = 150; //超时重传时间（毫秒）
         Action<BufferEntity> handleAction; //处理报文的函数 实际就是分发报文给各个游戏模块
         ConcurrentDictionary<int, BufferEntity> sendPackage = new ConcurrentDictionary<int, BufferEntity>(); //缓存已经发送的报文
-        ConcurrentDictionary<int, BufferEntity> waitHandle = new ConcurrentDictionary<int, BufferEntity>(); //缓存已经发送的报文
+        ConcurrentDictionary<int, BufferEntity> waitHandle = new ConcurrentDictionary<int, BufferEntity>(); //缓存错序的报文
 
 
         public UClient(USocket uSocket, IPEndPoint endPoint, int sendSN, int handleSN, int sessionID, Action<BufferEntity> dispatchNetEvent)
@@ -53,7 +53,7 @@ namespace Game.Net
                 case 1: //业务报文
                     BufferEntity ackPackage = new BufferEntity(buffer);
                     uSocket.SendACK(ackPackage); //先告诉服务器 我已经收到这个报文
-                    HandleLogicPackage(buffer);
+                    HandleLogicPackage(buffer); //再处理报文
                     break;
                 default:
                     break;
