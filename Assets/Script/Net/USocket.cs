@@ -20,7 +20,9 @@ namespace Game.Net
         {
             udpClient = new UdpClient(0);
             server = new IPEndPoint(IPAddress.Parse(ip), port);
-            UClient local = new UClient(this, server, 0, 0, 0, dispatchNetEvent);
+            //udpClient.Connect(server);
+            local = new UClient(this, server, 0, 0, 0, dispatchNetEvent);
+            ReceiveTask();
         }
 
         ConcurrentQueue<UdpReceiveResult> awaitHandle = new ConcurrentQueue<UdpReceiveResult>();
@@ -34,6 +36,8 @@ namespace Game.Net
                 try
                 {
                     UdpReceiveResult result = await udpClient.ReceiveAsync();
+                    awaitHandle.Enqueue(result);
+                    Debug.Log($"接收到服务器的消息");
                 }
                 catch (Exception ex)
                 {
@@ -80,7 +84,7 @@ namespace Game.Net
                     BufferEntity bufferEntity = new BufferEntity(data.RemoteEndPoint, data.Buffer);
                     if (bufferEntity.isFull)
                     {
-                        Debug.Log($"处理消息,id:{bufferEntity.messageID}");
+                        Debug.Log($"处理消息,id:{bufferEntity.messageID}, 序号：{bufferEntity.sn}");
                         //处理业务逻辑
                         local.Handle(bufferEntity);
                     }

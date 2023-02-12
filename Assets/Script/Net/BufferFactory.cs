@@ -17,12 +17,13 @@ namespace Game.Net
         /// </summary>
         /// <param name="messageID"></param>
         /// <param name="message"></param>
-        public static void CreateAndSendPackage(int messageID, IMessage message)
+        public static BufferEntity CreateAndSendPackage(int messageID, IMessage message)
         {
             JsonHelper.Log(messageID, message);
             BufferEntity buffer = new BufferEntity(USocket.local.endPoint, USocket.local.sessionID,
                 0, 0, MessageType.Logic.GetHashCode(), messageID, ProtobufHelper.ToBytes(message));
             USocket.local.Send(buffer);
+            return buffer;
         }
     }
 }

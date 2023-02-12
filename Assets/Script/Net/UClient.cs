@@ -22,7 +22,6 @@ namespace Game.Net
         ConcurrentDictionary<int, BufferEntity> sendPackage = new ConcurrentDictionary<int, BufferEntity>(); //缓存已经发送的报文
         ConcurrentDictionary<int, BufferEntity> waitHandle = new ConcurrentDictionary<int, BufferEntity>(); //缓存错序的报文
 
-
         public UClient(USocket uSocket, IPEndPoint endPoint, int sendSN, int handleSN, int sessionID, Action<BufferEntity> dispatchNetEvent)
         {
             this.uSocket = uSocket;
@@ -39,6 +38,7 @@ namespace Game.Net
         {
             if (this.sessionID==0 && buffer.session!=0)
             {
+                Debug.Log($"服务器发送的会话ID是：{buffer.session}");
                 this.sessionID = buffer.session;
             }
             switch(buffer.messageType)
