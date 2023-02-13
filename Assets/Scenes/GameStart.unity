@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -306,6 +306,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 810630eec13652e498ca460d1ddac822, type: 3}
+  m_Script: {fileID: 11500000, guid: f5c14cfcaa049874ca799b3e205ae814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
