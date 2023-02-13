@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 9cb0934504d0b8c45bac68fd2c1d7750
+timeCreated: 1552824802
+licenseType: Pro
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: HYHanHei
+  fontNames:
+  - HYHanHei
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
