@@ -191,24 +191,3 @@ namespace Game.View
 
     }
 }
-
-/// <summary>
-/// 窗体类型
-/// </summary>
-public enum WindowType
-{
-    LoginWindow,
-    StoreWindow,
-    TipsWindow,//提示窗口
-}
-
-
-/// <summary>
-/// 场景类型,目的:提供根据场景类型进行预加载
-/// </summary>
-public enum ScenesType
-{
-    None,
-    Login,
-    Battle,
-}
