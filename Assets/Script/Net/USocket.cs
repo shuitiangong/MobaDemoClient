@@ -67,7 +67,7 @@ namespace Game.Net
 
         }
 
-        public async void SendACK(BufferEntity bufferEntity)
+        public void SendACK(BufferEntity bufferEntity)
         {
             Send(bufferEntity.buffer, server);
         }
