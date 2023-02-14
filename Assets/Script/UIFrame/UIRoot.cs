@@ -12,7 +12,7 @@ public class UIRoot
     public static void Init() {
         if (transform==null)
         {
-            var obj=  Resources.Load<GameObject>("UI/UIRoot");
+            var obj =  Resources.Load<GameObject>("UI/UIRoot");
             transform= GameObject.Instantiate(obj).transform;
         }
 

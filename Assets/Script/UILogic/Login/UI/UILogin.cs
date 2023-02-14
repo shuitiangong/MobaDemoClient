@@ -16,7 +16,7 @@ public class UILogin : BaseWindow
     {
         scenesType = ScenesType.Login;
         resident = false;
-        resName = "User/UILogin";
+        resName = "UIPrefab/User/UILogin";
     }
     public override void Update(float deltaTime)
     {
@@ -43,14 +43,16 @@ public class UILogin : BaseWindow
         switch (s2cMSG.Result)
         {
             case 0:
-                Debug.Log("登陆成功！");
+                Debug.Log("注册成功！");
                 break;
             case 1:
-                Debug.Log("密码错误！");
+                Debug.Log("存在敏感词！");
                 break;
             case 2:
+                Debug.Log("账号或密码格式错误！");
                 break;
             case 3:
+                Debug.Log("账号已注册！");
                 break;
             default:
                 break;
@@ -77,9 +79,10 @@ public class UILogin : BaseWindow
                 Close(); 
                 break;
             case 1:
-                Debug.Log("密码错误！");
+                Debug.Log("账号不存在！");
                 break;
             case 2:
+                Debug.Log("密码错误！");
                 break;
             case 3:
                 break;

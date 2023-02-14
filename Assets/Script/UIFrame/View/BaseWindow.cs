@@ -174,7 +174,7 @@ namespace Game.View
                 var obj = Resources.Load<GameObject>(resName);
                 if (obj == null)
                 {
-                    Debug.LogError($"未找到UI预制件{selfType}");
+                    Debug.LogError($"未找到UI预制件{selfType}， {resName}");
                     return false;
                 }
                 transform = GameObject.Instantiate(obj).transform;
