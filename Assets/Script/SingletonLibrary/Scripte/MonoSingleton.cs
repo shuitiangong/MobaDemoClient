@@ -16,7 +16,7 @@ public class MonoSingleton<T> : MonoBehaviour where T:MonoBehaviour
                 DontDestroyOnLoad(MonoSingletonObject.go);
             }
 
-            if (MonoSingletonObject.go!=null)
+            if (MonoSingletonObject.go!=null && instance==null)
             {
                 instance= MonoSingletonObject.go.AddComponent<T>();
             }

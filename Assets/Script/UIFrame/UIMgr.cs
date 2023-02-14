@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Game.View;
+using System;
 /// <summary>
 /// 窗体类型
 /// </summary>
@@ -22,15 +23,17 @@ public enum ScenesType
 {
     None,
     Login,
+    Logic,
     Battle,
 }
 
 
-public class WindowManager : MonoSingleton<WindowManager>
+public class UIMgr : MonoSingleton<UIMgr>
 {
     Dictionary<WindowType, BaseWindow> windowDIC = new Dictionary<WindowType, BaseWindow>();
     //构造函数 初始化
-    public WindowManager() {
+    public UIMgr() {
+        windowDIC.Add(WindowType.TipsWindow, new UITips());
         windowDIC.Add(WindowType.LoginWindow, new UILogin());
         //商店
         //
@@ -98,5 +101,12 @@ public class WindowManager : MonoSingleton<WindowManager>
                 item.Close(isDestroy);
             }
         }
+    }
+
+    //显示提示窗体
+    public void ShowTips(string text, Action enterBtnAction = null, Action closeBtnAction = null)
+    {
+        UITips tipsWindow = (UITips)Instance.OpenWindow(WindowType.TipsWindow);
+        tipsWindow.Show(text, enterBtnAction, closeBtnAction);
     }
 }

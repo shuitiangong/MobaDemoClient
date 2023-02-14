@@ -170,7 +170,7 @@ namespace Game.View
             }
 
             if (transform == null)
-            {
+            { 
                 var obj = Resources.Load<GameObject>(resName);
                 if (obj == null)
                 {

@@ -43,16 +43,16 @@ public class UILogin : BaseWindow
         switch (s2cMSG.Result)
         {
             case 0:
-                Debug.Log("注册成功！");
+                UIMgr.Instance.ShowTips("注册成功！");
                 break;
             case 1:
-                Debug.Log("存在敏感词！");
+                UIMgr.Instance.ShowTips("存在敏感词！");
                 break;
             case 2:
-                Debug.Log("账号或密码格式错误！");
+                UIMgr.Instance.ShowTips("账号或密码格式错误！");
                 break;
             case 3:
-                Debug.Log("账号已注册！");
+                UIMgr.Instance.ShowTips("账号已注册！");
                 break;
             default:
                 break;
@@ -71,18 +71,21 @@ public class UILogin : BaseWindow
                 {
                     //保存数据 打开大厅界面
                     LoginMgr.Instance.SaveRoleInfo(s2cMSG.RolesInfo);
+                    //打开大厅界面
+                    UIMgr.Instance.OpenWindow(WindowType.LobbyWindow);
                 }
                 else
                 {
+                    UIMgr.Instance.OpenWindow(WindowType.RolesWindow);
                     //跳转到角色界面
                 }
                 Close(); 
                 break;
             case 1:
-                Debug.Log("账号不存在！");
+                UIMgr.Instance.ShowTips("账号不存在！");
                 break;
             case 2:
-                Debug.Log("密码错误！");
+                UIMgr.Instance.ShowTips("密码错误！");
                 break;
             case 3:
                 break;
