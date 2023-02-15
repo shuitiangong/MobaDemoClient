@@ -6,14 +6,13 @@ using UnityEngine.UI;
 namespace Game.View
 {
 
-    public class BaseWindow
+    public class UIBase
     {
-
         protected Transform transform;//窗体
         protected string resName;//资源名称
         protected bool resident; //是否常驻
         protected bool visible = false;//是否可见
-        protected WindowType selfType;//窗体类型
+        protected UIType selfType;//窗体类型
         protected ScenesType scenesType;//场景类型
 
         //UI控件 按钮
@@ -79,7 +78,7 @@ namespace Game.View
 
             if (transform.gameObject.activeSelf == false)
             {
-                UIRoot.SetParent(transform, true, selfType == WindowType.TipsWindow);
+                UIRoot.SetParent(transform, true, selfType == UIType.Tips);
                 transform.gameObject.SetActive(true);
                 visible = true;
                 OnEnable();//调用激活时候触发的事件
@@ -137,7 +136,7 @@ namespace Game.View
         }
 
         //窗体类型
-        public WindowType GetWindowType()
+        public UIType GetWindowType()
         {
             return selfType;
         }
@@ -181,7 +180,7 @@ namespace Game.View
 
                 transform.gameObject.SetActive(false);
 
-                UIRoot.SetParent(transform, false, selfType == WindowType.TipsWindow);
+                UIRoot.SetParent(transform, false, selfType == UIType.Tips);
                 return true;
             }
 

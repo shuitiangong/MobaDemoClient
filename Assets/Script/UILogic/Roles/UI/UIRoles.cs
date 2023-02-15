@@ -7,15 +7,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIRoles : BaseWindow
+public class UIRoles : UIBase
 {
     InputField inputField;
     public UIRoles()
     {
-        selfType = WindowType.LoginWindow;
+        selfType = UIType.Login;
         scenesType = ScenesType.Login;
         resident = false;
-        resName = "UIPrefab/Roles/RolesWindow";
+        resName = "UIPrefab/Roles/UIRoles";
     }
 
     public override void Update(float deltaTime)
@@ -43,7 +43,7 @@ public class UIRoles : BaseWindow
             //缓存角色
             RolesMgr.Instance.SaveRolesInfo(s2cMSG.RolesInfo);
             Close();
-            UIMgr.Instance.OpenWindow(WindowType.LobbyWindow);
+            UIMgr.Instance.OpenWindow(UIType.Lobby);
         }
         else
         {

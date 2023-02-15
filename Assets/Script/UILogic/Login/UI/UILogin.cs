@@ -8,13 +8,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class UILogin : BaseWindow
+public class UILogin : UIBase
 {
     private InputField AccountInput;
     private InputField PwdInput;
     public UILogin()
     {
-        selfType = WindowType.LoginWindow;
+        selfType = UIType.Login;
         scenesType = ScenesType.Login;
         resident = false;
         resName = "UIPrefab/User/UILogin";
@@ -66,18 +66,18 @@ public class UILogin : BaseWindow
         switch (s2cMSG.Result)
         {
             case 0:
-                Debug.Log("登陆成功！");
+                Debug.Log("登录成功！");
                 //保存数据
                 if (s2cMSG.RolesInfo!=null)
                 {
                     //保存数据 打开大厅界面
                     LoginMgr.Instance.SaveRoleInfo(s2cMSG.RolesInfo);
                     //打开大厅界面
-                    UIMgr.Instance.OpenWindow(WindowType.LobbyWindow);
+                    UIMgr.Instance.OpenWindow(UIType.Lobby);
                 }
                 else
                 {
-                    UIMgr.Instance.OpenWindow(WindowType.RolesWindow);
+                    UIMgr.Instance.OpenWindow(UIType.Roles);
                     //跳转到角色界面
                 }
                 Close(); 

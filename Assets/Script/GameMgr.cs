@@ -12,7 +12,7 @@ public class GameMgr : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         uSocket = new USocket(DispatchNetEvent);
         //打开登录界面
-        UIMgr.Instance.OpenWindow(WindowType.LoginWindow);
+        UIMgr.Instance.OpenWindow(UIType.Login);
     }
 
 

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UITips: BaseWindow
+public class UITips: UIBase
 {
     private Transform tips01;
     private Text tips01Text;
@@ -16,8 +16,8 @@ public class UITips: BaseWindow
     {
         scenesType = ScenesType.Logic;
         resident = false;
-        resName = "UIPrefab/Tips/TipsWindow";
-        selfType = WindowType.TipsWindow;
+        resName = "UIPrefab/Tips/UITips";
+        selfType = UIType.Tips;
     }
 
     public override void Update(float deltaTime)

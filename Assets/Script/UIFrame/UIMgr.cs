@@ -6,14 +6,14 @@ using System;
 /// <summary>
 /// 窗体类型
 /// </summary>
-public enum WindowType
+public enum UIType
 {
-    LoginWindow,
-    RolesWindow,
-    LobbyWindow,
-    RoomWindow,
-    BattleWindow,
-    TipsWindow,
+    Login,
+    Roles,
+    Lobby,
+    Room,
+    Battle,
+    Tips,
 }
 
 /// <summary>
@@ -30,12 +30,12 @@ public enum ScenesType
 
 public class UIMgr : MonoSingleton<UIMgr>
 {
-    Dictionary<WindowType, BaseWindow> windowDIC = new Dictionary<WindowType, BaseWindow>();
+    Dictionary<UIType, UIBase> windowDIC = new Dictionary<UIType, UIBase>();
     //构造函数 初始化
     public UIMgr() {
-        windowDIC.Add(WindowType.TipsWindow, new UITips());
-        windowDIC.Add(WindowType.LoginWindow, new UILogin());
-        windowDIC.Add(WindowType.RolesWindow, new UIRoles());
+        windowDIC.Add(UIType.Tips, new UITips());
+        windowDIC.Add(UIType.Login, new UILogin());
+        windowDIC.Add(UIType.Roles, new UIRoles());
     }
 
     public void Update()
@@ -50,8 +50,8 @@ public class UIMgr : MonoSingleton<UIMgr>
             
     }
     //打开窗口
-    public BaseWindow OpenWindow(WindowType type) {
-        BaseWindow window;
+    public UIBase OpenWindow(UIType type) {
+        UIBase window;
         if (windowDIC.TryGetValue(type, out window))
         {
             window.Open();
@@ -65,8 +65,8 @@ public class UIMgr : MonoSingleton<UIMgr>
     }
 
     //关闭窗口
-    public void CloseWindow(WindowType type) {
-        BaseWindow window;
+    public void CloseWindow(UIType type) {
+        UIBase window;
         if (windowDIC.TryGetValue(type, out window))
         {
             window.Close();
@@ -104,7 +104,7 @@ public class UIMgr : MonoSingleton<UIMgr>
     //显示提示窗体
     public void ShowTips(string text, Action enterBtnAction = null, Action closeBtnAction = null)
     {
-        UITips tipsWindow = (UITips)Instance.OpenWindow(WindowType.TipsWindow);
+        UITips tipsWindow = (UITips)Instance.OpenWindow(UIType.Tips);
         tipsWindow.Show(text, enterBtnAction, closeBtnAction);
     }
 }
