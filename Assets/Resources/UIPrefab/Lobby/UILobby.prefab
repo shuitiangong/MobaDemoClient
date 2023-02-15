@@ -1142,7 +1142,7 @@ GameObject:
   - component: {fileID: 222836374537859736}
   - component: {fileID: 114292771563846042}
   m_Layer: 0
-  m_Name: Duan
+  m_Name: Rank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
