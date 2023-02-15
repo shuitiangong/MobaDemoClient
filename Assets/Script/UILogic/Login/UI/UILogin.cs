@@ -14,6 +14,7 @@ public class UILogin : BaseWindow
     private InputField PwdInput;
     public UILogin()
     {
+        selfType = WindowType.LoginWindow;
         scenesType = ScenesType.Login;
         resident = false;
         resName = "UIPrefab/User/UILogin";

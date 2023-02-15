@@ -35,9 +35,7 @@ public class UIMgr : MonoSingleton<UIMgr>
     public UIMgr() {
         windowDIC.Add(WindowType.TipsWindow, new UITips());
         windowDIC.Add(WindowType.LoginWindow, new UILogin());
-        //商店
-        //
-        //windowDIC.Add(WindowType.StoreWindow,new StoreWindow());
+        windowDIC.Add(WindowType.RolesWindow, new UIRoles());
     }
 
     public void Update()
