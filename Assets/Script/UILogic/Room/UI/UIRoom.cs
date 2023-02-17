@@ -57,6 +57,7 @@ public class UIRoom : UIBase
     protected override void Awake()
     {
         base.Awake();
+        BattleListener.Instance.Init();
         skillInfo = transform.Find("SkillInfo");
         time = transform.Find("Time").GetComponent<Text>();
         teamA = transform.Find("TeamA/Team_HeroA_item");
