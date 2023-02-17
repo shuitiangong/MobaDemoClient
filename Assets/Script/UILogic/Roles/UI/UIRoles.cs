@@ -15,7 +15,7 @@ public class UIRoles : UIBase
         selfType = UIType.Login;
         scenesType = ScenesType.Login;
         resident = false;
-        resName = "UIPrefab/Roles/UIRoles";
+        resName = "Roles/UIRoles";
     }
 
     public override void Update(float deltaTime)
@@ -43,7 +43,7 @@ public class UIRoles : UIBase
             //缓存角色
             RolesMgr.Instance.SaveRolesInfo(s2cMSG.RolesInfo);
             Close();
-            UIMgr.Instance.OpenWindow(UIType.Lobby);
+            UIMgr.Instance.ShowUI(UIType.Lobby);
         }
         else
         {

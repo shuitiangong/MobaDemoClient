@@ -18,7 +18,7 @@ public class UILobby : UIBase
         selfType = UIType.Lobby;
         scenesType = ScenesType.Logic;
         resident = false;
-        resName = "UIPrefab/Lobby/UILobby";
+        resName = "Lobby/UILobby";
     }
 
     public override void Update(float deltaTime)
@@ -73,8 +73,8 @@ public class UILobby : UIBase
         LobbyUpdateMatchStateS2C s2cMSG = ProtobufHelper.FromBytes<LobbyUpdateMatchStateS2C>(res.proto);
         if (s2cMSG.Result==0)
         {
-            PlayerMgr.Instance.SaveRoomInfo(s2cMSG.RoomInfo);
-            UIMgr.Instance.OpenWindow(UIType.Room);
+            RoomMgr.Instance.SaveRoomInfo(s2cMSG.RoomInfo);
+            UIMgr.Instance.ShowUI(UIType.Room);
             Close();
 
         }

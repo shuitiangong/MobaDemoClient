@@ -170,7 +170,7 @@ namespace Game.View
 
             if (transform == null)
             { 
-                var obj = Resources.Load<GameObject>(resName);
+                var obj = ResMgr.Instance.LoadUI(resName);
                 if (obj == null)
                 {
                     Debug.LogError($"未找到UI预制件{selfType}， {resName}");

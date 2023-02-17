@@ -50,7 +50,7 @@ public class UIMgr : MonoSingleton<UIMgr>
             
     }
     //打开窗口
-    public UIBase OpenWindow(UIType type) {
+    public UIBase ShowUI(UIType type) {
         UIBase window;
         if (windowDIC.TryGetValue(type, out window))
         {
@@ -104,7 +104,7 @@ public class UIMgr : MonoSingleton<UIMgr>
     //显示提示窗体
     public void ShowTips(string text, Action enterBtnAction = null, Action closeBtnAction = null)
     {
-        UITips tipsWindow = (UITips)Instance.OpenWindow(UIType.Tips);
+        UITips tipsWindow = (UITips)Instance.ShowUI(UIType.Tips);
         tipsWindow.Show(text, enterBtnAction, closeBtnAction);
     }
 }

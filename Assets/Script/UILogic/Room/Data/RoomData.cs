@@ -1,18 +1,11 @@
-﻿using System.Collections;
+﻿using Google.Protobuf.Collections;
+using ProtoMsg;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomData : MonoBehaviour
+public class RoomData : Singleton<RoomData>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public RepeatedField<PlayerInfo> playerinfos;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

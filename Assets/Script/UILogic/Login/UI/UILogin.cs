@@ -17,7 +17,7 @@ public class UILogin : UIBase
         selfType = UIType.Login;
         scenesType = ScenesType.Login;
         resident = false;
-        resName = "UIPrefab/User/UILogin";
+        resName = "User/UILogin";
     }
     public override void Update(float deltaTime)
     {
@@ -73,11 +73,11 @@ public class UILogin : UIBase
                     //保存数据 打开大厅界面
                     LoginMgr.Instance.SaveRoleInfo(s2cMSG.RolesInfo);
                     //打开大厅界面
-                    UIMgr.Instance.OpenWindow(UIType.Lobby);
+                    UIMgr.Instance.ShowUI(UIType.Lobby);
                 }
                 else
                 {
-                    UIMgr.Instance.OpenWindow(UIType.Roles);
+                    UIMgr.Instance.ShowUI(UIType.Roles);
                     //跳转到角色界面
                 }
                 Close(); 

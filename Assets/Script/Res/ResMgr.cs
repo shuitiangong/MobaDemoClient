@@ -16,4 +16,16 @@ public class ResMgr: Singleton<ResMgr>
         GameObject obj = GameObject.Instantiate(res);
         return obj;
     }
+
+    //加载Sprite
+    public Sprite LoadSprite(string path)
+    {
+        Sprite sprite = Resources.Load<Sprite>($"Image/{path}");
+        if (sprite==null)
+        {
+            Debug.LogError($"没有找到图片：{path}");
+            return null;
+        }
+        return sprite;
+    }
 }

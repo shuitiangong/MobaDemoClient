@@ -16,13 +16,14 @@ public class PlayerMgr : Singleton<PlayerMgr>
         return PlayerData.Instance.rolesInfo;
     }
 
-    public void SaveRoomInfo(RoomInfo roomInfo)
+    /// <summary>
+    /// 检查是否是自己的角色
+    /// </summary>
+    /// <param name="rolesID"></param>
+    /// <returns></returns>
+    public bool CheckIsSelfRoles(int rolesID)
     {
-        PlayerData.Instance.roomInfo = roomInfo;
+        return PlayerData.Instance.rolesInfo.RolesID == rolesID;
     }
 
-    public void RemoveRoomInfo(RoomInfo roomInfo)
-    {
-        PlayerData.Instance.roomInfo = null;
-    }
 }
