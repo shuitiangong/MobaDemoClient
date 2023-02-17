@@ -60,7 +60,7 @@ public class UIRoom : UIBase
         skillInfo = transform.Find("SkillInfo");
         time = transform.Find("Time").GetComponent<Text>();
         teamA = transform.Find("TeamA/Team_HeroA_item");
-        teamB = transform.Find("TeamB/Team_HeroA_item");
+        teamB = transform.Find("TeamB/Team_HeroB_item");
         skillA = transform.Find("SkillA").GetComponent<Image>();
         skillB = transform.Find("SkillB").GetComponent<Image>();
         chatText = transform.Find("ChatBG/Scroll View/Viewport/Content/ChatText").GetComponent<Text>();
@@ -227,12 +227,14 @@ public class UIRoom : UIBase
             else
             {
                 go = GameObject.Instantiate(heroB_item.gameObject, heroB_item.parent, false);
+                
             }
+            go.GetComponent<Image>().sprite = ResMgr.Instance.LoadSprite($"HeroTexture/{s2cMSG.PlayerList[i].HeroID}");
             go.transform.Find("NickName").GetComponent<Text>().text = s2cMSG.PlayerList[i].RolesInfo.NickName;
             go.transform.Find("SkillA").GetComponent<Image>().sprite 
                 = ResMgr.Instance.LoadSprite($"GeneralSkill/{s2cMSG.PlayerList[i].SkillA}");
             go.transform.Find("SkillB").GetComponent<Image>().sprite
-                = ResMgr.Instance.LoadSprite($"GeneralSkill/{s2cMSG.PlayerList[i].SkillA}");
+                = ResMgr.Instance.LoadSprite($"GeneralSkill/{s2cMSG.PlayerList[i].SkillB}");
             go.transform.Find("Progress").GetComponent<Text>().text = "0%";
             go.gameObject.SetActive(true);
             //缓存克隆出来的游戏物体
@@ -240,11 +242,13 @@ public class UIRoom : UIBase
         }
         async = SceneManager.LoadSceneAsync("Battle");
         async.allowSceneActivation = false; //不要激活场景
+        SendProgress();
     }
 
     async void SendProgress()
     {
         await Task.Delay(500);
+        Debug.Log($"加载进度。。。。。。。{async.progress * 100}");
         BufferFactory.CreateAndSendPackage(1406, new RoomLoadProgressC2S
         {
             LoadProgress = (int)(async.progress > 0.8 ? 100 : async.progress * 100)
@@ -380,9 +384,9 @@ public class UIRoom : UIBase
 
     private void SendSelectSkill(Button button, int selectSkillID)
     {
-        skillID = selectSkillID;
         button.onClick.AddListener(() =>
         {
+            skillID = selectSkillID;
             BufferFactory.CreateAndSendPackage(1401, new RoomSelectHeroSkillC2S()
             {
                 SkillID = skillID,

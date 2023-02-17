@@ -1726,7 +1726,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+  m_Text: 
 --- !u!114 &114818884495922576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4459,8 +4459,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114424862915077900}
   m_HandleRect: {fileID: 224422728606541866}
   m_Direction: 2
-  m_Value: 0.9999913
-  m_Size: 0.6117993
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
