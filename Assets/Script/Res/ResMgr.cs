@@ -10,11 +10,10 @@ public class ResMgr: Singleton<ResMgr>
         GameObject res = Resources.Load<GameObject>($"UIPrefab/{path}");
         if (res==null)
         {
-            Debug.LogError($"没有找到UI窗体：{path}");
+            Debug.LogError($"没有找到UI窗体：UIPrefab/{path}");
             return null;
         }
-        GameObject obj = GameObject.Instantiate(res);
-        return obj;
+        return res;
     }
 
     //加载Sprite

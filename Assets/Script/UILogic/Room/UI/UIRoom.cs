@@ -12,11 +12,11 @@ using UnityEngine.UI;
 
 public class UIRoom : UIBase
 {
-    private bool isLock = false;
+    private bool isLock;
     private int lockHeroID;
     private int gridID;
     private int skillID;
-    private int nowTime = 10;
+    private int nowTime;
     private Transform skillInfo; //技能选择面板
     private Text time;
     private Transform teamA;
@@ -29,6 +29,7 @@ public class UIRoom : UIBase
     private Dictionary<int, GameObject> rolesDIC;
     private CancellationTokenSource ct;
     private Dictionary<int, GameObject> playerLoadDic;
+    private InputField chatInputField;
 
     public UIRoom()
     {
@@ -42,6 +43,13 @@ public class UIRoom : UIBase
     public override void Update(float deltaTime)
     {
         base.Update(deltaTime);
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            BufferFactory.CreateAndSendPackage(1404, new RoomSendMsgC2S()
+            {
+                Text = chatInputField.text
+            });
+        }
     }
 
 
@@ -55,8 +63,11 @@ public class UIRoom : UIBase
         teamB = transform.Find("TeamB/Team_HeroA_item");
         skillA = transform.Find("SkillA").GetComponent<Image>();
         skillB = transform.Find("SkillB").GetComponent<Image>();
-        chatText = transform.Find("ChatBG/Scroll View/Viewport/Content/Text").GetComponent<Text>();
+        chatText = transform.Find("ChatBG/Scroll View/Viewport/Content/ChatText").GetComponent<Text>();
         chatVertical = transform.Find("ChatBG/Scroll View/ChatVertical").GetComponent<Scrollbar>();
+        chatInputField = transform.Find("ChatInput").GetComponent<InputField>();
+        nowTime = 30;
+        isLock = false;
         ct = new CancellationTokenSource();
         rolesDIC = new Dictionary<int, GameObject>();
         playerLoadDic = new Dictionary<int, GameObject>();
@@ -66,14 +77,14 @@ public class UIRoom : UIBase
         for (int i = 0; i<roomInfo.TeamA.Count; i++)
         {
             GameObject go = GameObject.Instantiate(teamA.gameObject, teamA.parent, false);
-            go.transform.Find("HeroA_NickName").GetComponent<Text>().text = roomInfo.TeamA[i].NickName;
+            go.transform.Find("Hero_NickName").GetComponent<Text>().text = roomInfo.TeamA[i].NickName;
             go.SetActive(true);
             rolesDIC[roomInfo.TeamA[i].RolesID] = go;
         }
         for (int i = 0; i < roomInfo.TeamA.Count; i++)
         {
             GameObject go = GameObject.Instantiate(teamB.gameObject, teamB.parent, false);
-            go.transform.Find("HeroB_NickName").GetComponent<Text>().text = roomInfo.TeamB[i].NickName;
+            go.transform.Find("Hero_NickName").GetComponent<Text>().text = roomInfo.TeamB[i].NickName;
             go.SetActive(true);
             rolesDIC[roomInfo.TeamB[i].RolesID] = go;
         }
@@ -168,6 +179,7 @@ public class UIRoom : UIBase
     private void OnRoomLockHeroS2C(BufferEntity res)
     {
         RoomLockHeroS2C s2cMSG = ProtobufHelper.FromBytes<RoomLockHeroS2C>(res.proto);
+        rolesDIC[s2cMSG.RolesID].transform.Find("Hero_State").GetComponent<Text>().text = "已锁定";
         if (PlayerMgr.Instance.CheckIsSelfRoles(s2cMSG.RolesID))
         {
             isLock = true; //已锁定英雄
@@ -222,6 +234,7 @@ public class UIRoom : UIBase
             go.transform.Find("SkillB").GetComponent<Image>().sprite
                 = ResMgr.Instance.LoadSprite($"GeneralSkill/{s2cMSG.PlayerList[i].SkillA}");
             go.transform.Find("Progress").GetComponent<Text>().text = "0%";
+            go.gameObject.SetActive(true);
             //缓存克隆出来的游戏物体
             playerLoadDic[s2cMSG.PlayerList[i].RolesInfo.RolesID] = go;
         }
@@ -308,6 +321,11 @@ public class UIRoom : UIBase
                     {
                         if (!isLock)
                         {
+                            if (lockHeroID==0)
+                            {
+                                Debug.Log("请先选择英雄再锁定");
+                                return;
+                            }
                             isLock = true;
                             BufferFactory.CreateAndSendPackage(1405, new RoomSelectHeroC2S()
                             {

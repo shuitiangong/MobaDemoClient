@@ -36,6 +36,8 @@ public class UIMgr : MonoSingleton<UIMgr>
         windowDIC.Add(UIType.Tips, new UITips());
         windowDIC.Add(UIType.Login, new UILogin());
         windowDIC.Add(UIType.Roles, new UIRoles());
+        windowDIC.Add(UIType.Lobby, new UILobby());
+        windowDIC.Add(UIType.Room, new UIRoom());
     }
 
     public void Update()

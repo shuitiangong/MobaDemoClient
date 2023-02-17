@@ -71,6 +71,7 @@ public class UILogin : UIBase
                 if (s2cMSG.RolesInfo!=null)
                 {
                     //保存数据 打开大厅界面
+                    RolesMgr.Instance.SaveRolesInfo(s2cMSG.RolesInfo);
                     LoginMgr.Instance.SaveRoleInfo(s2cMSG.RolesInfo);
                     //打开大厅界面
                     UIMgr.Instance.ShowUI(UIType.Lobby);

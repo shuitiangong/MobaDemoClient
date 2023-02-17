@@ -173,7 +173,7 @@ namespace Game.View
                 var obj = ResMgr.Instance.LoadUI(resName);
                 if (obj == null)
                 {
-                    Debug.LogError($"未找到UI预制件{selfType}， {resName}");
+                    Debug.LogError($"未找到UI预制件{selfType}， UIPrefab/{resName}");
                     return false;
                 }
                 transform = GameObject.Instantiate(obj).transform;

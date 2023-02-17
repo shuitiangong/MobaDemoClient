@@ -16,7 +16,7 @@ public class UITips: UIBase
     {
         scenesType = ScenesType.Logic;
         resident = false;
-        resName = "UIPrefab/Tips/UITips";
+        resName = "Tips/UITips";
         selfType = UIType.Tips;
     }
 

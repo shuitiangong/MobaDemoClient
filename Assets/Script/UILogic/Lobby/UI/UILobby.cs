@@ -37,7 +37,7 @@ public class UILobby : UIBase
 
         matchModeBtn = transform.Find("LobbyBG/MatchModeBtn");
         qualifyingBtn = transform.Find("LobbyBG/QualifyingBtn");
-        stopMatchBtn = transform.Find("Lobby/StopMatchBtn");
+        stopMatchBtn = transform.Find("LobbyBG/StopMatchBtn");
     }
 
     protected override void OnAddListener()
@@ -114,6 +114,7 @@ public class UILobby : UIBase
         matchTips.gameObject.SetActive(false);
         //获取到角色信息
         RolesInfo rolesInfo = PlayerMgr.Instance.GetRolesInfo();
+        Debug.Log(rolesInfo);
         roleName.text = rolesInfo.NickName;
         rank.text = rolesInfo.VictoryPoint.ToString();
         goldCount.text = rolesInfo.GoldCoin.ToString();
@@ -136,10 +137,10 @@ public class UILobby : UIBase
             switch(buttonList[i].name)
             {
                 case "MatchModeBtn":
-                    OnClickMatchModeBtn();
+                    OnClickMatchModeBtn(buttonList[i]);
                     break;
                 case "StopMatchBtn":
-                    OnClickStopMatchBtn();
+                    OnClickStopMatchBtn(buttonList[i]);
                     break;
                 default:
                     break;
@@ -147,13 +148,20 @@ public class UILobby : UIBase
         }
     }
 
-    private void OnClickMatchModeBtn()
+    private void OnClickMatchModeBtn(Button button)
     {
-        BufferFactory.CreateAndSendPackage(1300, null);
+        button.onClick.AddListener(() =>
+        {
+            BufferFactory.CreateAndSendPackage(1300, new LobbyToMatchC2S());
+        });
+        
     }
 
-    private void OnClickStopMatchBtn()
+    private void OnClickStopMatchBtn(Button button)
     {
-        BufferFactory.CreateAndSendPackage(1302, null);
+        button.onClick.AddListener(() =>
+        {
+            BufferFactory.CreateAndSendPackage(1302, new LobbyQuitMatchC2S());
+        });
     }
 }
