@@ -1,11 +1,17 @@
 ﻿using Google.Protobuf.Collections;
 using ProtoMsg;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomMgr : Singleton<RoomMgr>
 {
+
+    public void InitData()
+    {
+        RoomData.Instance.Init();
+    }
     public void SaveRoomInfo(RoomInfo roomInfo)
     {
         PlayerData.Instance.roomInfo = roomInfo;
@@ -20,6 +26,17 @@ public class RoomMgr : Singleton<RoomMgr>
     {
         return PlayerData.Instance.roomInfo;
     }
+
+    public void SavePlayerCtrl(int rolesID, PlayerCtrl playerCtrl)
+    {
+        RoomData.Instance.playerCtrlDic[rolesID] = playerCtrl;
+    }
+
+    public void SavePlayerObjects(int rolesID, GameObject hero)
+    {
+        RoomData.Instance.playerObjects[rolesID] = hero;
+    }
+
     /// <summary>
     /// 获取阵营信息
     /// </summary>
@@ -35,6 +52,12 @@ public class RoomMgr : Singleton<RoomMgr>
             }
         }
         return 1;
+    }
+
+    public void SaveHeroAttribute(int rolesID, HeroAttributeEntity currentAttribute, HeroAttributeEntity totalAttribute)
+    {
+        RoomData.Instance.heroCurrentAtt[rolesID] = currentAttribute;
+        RoomData.Instance.heroTotalAtt[rolesID] = totalAttribute;
     }
 
     public string GetNickName(int rolesID)
@@ -59,5 +82,10 @@ public class RoomMgr : Singleton<RoomMgr>
     public void SavePlayerInfo(RepeatedField<PlayerInfo> playerInfos)
     {
         RoomData.Instance.playerinfos = playerInfos;
+    }
+
+    public void CloseRoom()
+    {
+        RoomData.Instance.Clear();
     }
 }

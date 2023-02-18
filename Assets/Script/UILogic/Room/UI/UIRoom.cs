@@ -212,6 +212,7 @@ public class UIRoom : UIBase
 
     private void OnRoomToBattleS2C(BufferEntity res)
     {
+        RoomMgr.Instance.InitData();
         RoomToBattleS2C s2cMSG = ProtobufHelper.FromBytes<RoomToBattleS2C>(res.proto);
         RoomMgr.Instance.SavePlayerInfo(s2cMSG.PlayerList);
         transform.Find("LoadBG").gameObject.SetActive(true);
