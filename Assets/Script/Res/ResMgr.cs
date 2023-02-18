@@ -27,4 +27,16 @@ public class ResMgr: Singleton<ResMgr>
         }
         return sprite;
     }
+
+    //加载模型
+    public GameObject LoadModel(string path)
+    {
+        GameObject res = Resources.Load<GameObject>($"Model/{path}");
+        if (res == null)
+        {
+            Debug.LogError($"没有找到模型：Model/{path}");
+            return null;
+        }
+        return GameObject.Instantiate(res);
+    }
 }

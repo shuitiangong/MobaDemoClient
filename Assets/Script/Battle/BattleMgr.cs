@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class BattleMgr : MonoBehaviour
 {
-    private Dictionary<int, PlayerCtrl> playerCtrlDic;
-    private Dictionary<int, GameObject> playerObjects;
     private void Awake()
     {
-        playerCtrlDic = new Dictionary<int, PlayerCtrl>();
-        playerObjects = new Dictionary<int, GameObject>();
         foreach (var playerInfo in RoomData.Instance.playerinfos)
         {
             GameObject hero = ResMgr.Instance.LoadModel($"Hero/{playerInfo.HeroID}/Model/{playerInfo.HeroID}");
@@ -17,8 +13,8 @@ public class BattleMgr : MonoBehaviour
             hero.transform.eulerAngles = BattleConfig.Instance.spawnRotation[playerInfo.PosID];
 
             PlayerCtrl playerCtrl = hero.AddComponent<PlayerCtrl>();
-            playerCtrlDic[playerInfo.RolesInfo.RolesID] = playerCtrl;
-            playerObjects[playerInfo.RolesInfo.RolesID] = hero;
+            RoomMgr.Instance.SavePlayerCtrl(playerInfo.RolesInfo.RolesID, playerCtrl);
+            RoomMgr.Instance.SavePlayerObjects(playerInfo.RolesInfo.RolesID, hero);
             //初始化每个角色
             playerCtrl.Init(playerInfo);
         }
@@ -36,15 +32,6 @@ public class BattleMgr : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (playerCtrlDic!=null)
-        {
-            playerCtrlDic.Clear();
-            playerCtrlDic = null;
-        }
-        if (playerObjects != null)
-        {
-            playerObjects.Clear();
-            playerObjects = null;
-        }
+        RoomMgr.Instance.CloseRoom();
     }
 }

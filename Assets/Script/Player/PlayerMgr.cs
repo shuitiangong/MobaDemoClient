@@ -25,5 +25,4 @@ public class PlayerMgr : Singleton<PlayerMgr>
     {
         return PlayerData.Instance.rolesInfo.RolesID == rolesID;
     }
-
 }
