@@ -23,8 +23,12 @@ public class PlayerCtrl : MonoBehaviour
     Image HPFill;
     Image MPFill;
     SkillMgr skillMgr;
+    AnimatorMgr animatorMgr;
+    public PlayerFSM playerFSM;
+
     public void Init(PlayerInfo playerInfo)
     {
+        
         this.playerInfo = playerInfo;
         isSelf = PlayerMgr.Instance.CheckIsSelfRoles(playerInfo.RolesInfo.RolesID);
         spawnPosition = transform.position;
@@ -46,9 +50,14 @@ public class PlayerCtrl : MonoBehaviour
         levelText = hud.transform.Find("Level/Text").GetComponent<Text>();
         //技能管理器
         skillMgr = this.gameObject.AddComponent<SkillMgr>();
+        skillMgr.Init(this);
         //动画管理器
-
+        animatorMgr = this.gameObject.AddComponent<AnimatorMgr>();
+        animatorMgr.Init(this);
         //角色状态机
+        playerFSM = this.gameObject.AddComponent<PlayerFSM>();
+        playerFSM.Init(this);
+
         if (isSelf)
         {
             if (playerInfo.TeamID==0)
