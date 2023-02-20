@@ -120,7 +120,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: d4964d4270d866b4190c1b55e0c330df, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 7cbd3aed784cd7d4dbb0b5ee5f30a11d, type: 2}
 --- !u!1 &140722157
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 360131933}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -342,7 +342,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 360131932}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -664,7 +664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100090, guid: cf86d7bbf26e4f14dbe1adb4942e10f3, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 100092, guid: cf86d7bbf26e4f14dbe1adb4942e10f3, type: 3}
       propertyPath: m_IsActive
@@ -672,7 +672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100092, guid: cf86d7bbf26e4f14dbe1adb4942e10f3, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 100094, guid: cf86d7bbf26e4f14dbe1adb4942e10f3, type: 3}
       propertyPath: m_StaticEditorFlags

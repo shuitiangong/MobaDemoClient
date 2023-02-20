@@ -22,8 +22,8 @@ public class PlayerCtrl : MonoBehaviour
     Text nickNameText;
     Image HPFill;
     Image MPFill;
-    SkillMgr skillMgr;
-    AnimatorMgr animatorMgr;
+    public SkillMgr skillMgr;
+    public AnimatorMgr animatorMgr;
     public PlayerFSM playerFSM;
 
     public void Init(PlayerInfo playerInfo)
@@ -103,10 +103,10 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Relive()
     {
-
+        this.transform.position = spawnPosition;
+        this.transform.eulerAngles = spawnRotation;
     }
 
 

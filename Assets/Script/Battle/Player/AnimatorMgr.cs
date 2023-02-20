@@ -76,15 +76,7 @@ public class AnimatorMgr : MonoBehaviour
 
     public void EndSkill()
     {
-
-    }
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
+        Debug.Log("技能释放结束");
+        playerCtrl.playerFSM.ToNext(FSMState.Idle);
     }
 }
