@@ -37,6 +37,16 @@ public class RoomMgr : Singleton<RoomMgr>
         RoomData.Instance.playerObjects[rolesID] = hero;
     }
 
+    public PlayerCtrl GetPlayerCtrl(int rolesID)
+    {
+        return RoomData.Instance.playerCtrlDic[rolesID];
+    }
+
+    public GameObject GetPlayerObjects(int rolesID)
+    {
+        return RoomData.Instance.playerObjects[rolesID];
+    }
+
     /// <summary>
     /// 获取阵营信息
     /// </summary>

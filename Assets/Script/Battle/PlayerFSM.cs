@@ -19,7 +19,6 @@ public class PlayerFSM : MonoBehaviour
     {
         this.playerCtrl = playerCtrl;
         agent = transform.GetComponent<NavMeshAgent>();
-        ToNext(FSMState.Idle);
         playerState[FSMState.Idle] = new PlayerIdle(transform, this);
         playerState[FSMState.Move] = new PlayerMove(transform, this);
         playerState[FSMState.Skill] = new PlayerSkill(transform, this);

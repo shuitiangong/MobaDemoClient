@@ -6,11 +6,9 @@ using UnityEngine;
 public class BattleMgr : MonoBehaviour
 {
     private bool isInit;
-    Dictionary<int, PlayerCtrl> playerCtrlDic;
     private void Awake()
     {
         isInit = false;
-        playerCtrlDic = new Dictionary<int, PlayerCtrl>();
         foreach (var playerInfo in RoomData.Instance.playerinfos)
         {
             GameObject hero = ResMgr.Instance.LoadModel($"Hero/{playerInfo.HeroID}/Model/{playerInfo.HeroID}");
@@ -21,6 +19,7 @@ public class BattleMgr : MonoBehaviour
             RoomMgr.Instance.SavePlayerCtrl(playerInfo.RolesInfo.RolesID, playerCtrl);
             RoomMgr.Instance.SavePlayerObjects(playerInfo.RolesInfo.RolesID, hero);
             //初始化每个角色 挂载控制器
+            Debug.Log($"playerID: {playerInfo.RolesInfo.RolesID}");
             playerCtrl.Init(playerInfo);
         }
 
@@ -32,8 +31,7 @@ public class BattleMgr : MonoBehaviour
     { 
         //先确定发送命令的玩家
         //调用其角色控制器 处理这个事件
-        playerCtrlDic[s2cMSG.CMD.RolesID].playerFSM.HandleCMD(s2cMSG);
-
+        RoomMgr.Instance.GetPlayerCtrl(s2cMSG.CMD.RolesID).playerFSM.HandleCMD(s2cMSG);
     }
 
     private void Update()

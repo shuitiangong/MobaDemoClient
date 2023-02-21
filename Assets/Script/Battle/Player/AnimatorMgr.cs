@@ -33,7 +33,8 @@ public class AnimatorMgr : MonoBehaviour
 
     public void Play(PlayerAnimationClip clip)
     {
-
+        ResetState();
+        animator.SetBool(clip.ToString(), true);
     }
 
     private void ResetState()
