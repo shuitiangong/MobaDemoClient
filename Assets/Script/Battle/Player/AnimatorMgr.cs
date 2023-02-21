@@ -72,7 +72,15 @@ public class AnimatorMgr : MonoBehaviour
 
     public void SpawnEffect(string key)
     {
-
+        GameObject effect = ResMgr.Instance.LoadEffect(playerInfo.HeroID, key);
+        effect.transform.position = transform.position;
+        effect.transform.eulerAngles = transform.eulerAngles;
+        effect.SetActive(true);
+        EConfig eConfig = effect.transform.GetComponent<EConfig>();
+        BattleUserInputC2S skillCMD = playerCtrl.playerFSM.skillCMD.CMD;
+        //playerCtrl.OnSkillTrriger 技能出发回调 由释放者控制
+        eConfig.Init(skillCMD.RolesID, skillCMD.LockTag, skillCMD.LockID,
+            transform.forward, transform.position, playerCtrl.OnSkillTrriger);
     }
 
     public void EndSkill()

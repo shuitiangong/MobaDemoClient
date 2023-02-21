@@ -3,6 +3,7 @@
 #pragma warning disable 1591, 0612, 3021
 #region Designer generated code
 
+using System;
 using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using scg = global::System.Collections.Generic;
@@ -689,7 +690,7 @@ namespace ProtoMsg {
       }
     }
 
-  }
+    }
 
   public sealed class V3Info : pb::IMessage {
     private static readonly pb::MessageParser<V3Info> _parser = new pb::MessageParser<V3Info>(() => new V3Info());

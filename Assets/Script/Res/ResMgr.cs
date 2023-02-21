@@ -39,4 +39,11 @@ public class ResMgr: Singleton<ResMgr>
         }
         return GameObject.Instantiate(res);
     }
+
+    //加载特效
+    public GameObject LoadEffect(int heroID, string skillName)
+    {
+        GameObject res = Resources.Load<GameObject>($"Hero/{heroID}/Effect/{skillName}");
+        return GameObject.Instantiate(res);
+    }
 }

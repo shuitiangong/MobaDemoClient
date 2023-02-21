@@ -28,7 +28,6 @@ public class PlayerCtrl : MonoBehaviour
 
     public void Init(PlayerInfo playerInfo)
     {
-        
         this.playerInfo = playerInfo;
         isSelf = PlayerMgr.Instance.CheckIsSelfRoles(playerInfo.RolesInfo.RolesID);
         spawnPosition = transform.position;
@@ -68,6 +67,85 @@ public class PlayerCtrl : MonoBehaviour
             {
                 Camera.main.transform.eulerAngles = new Vector3(45, -180, 0);
             }
+        }
+    }
+
+    /// <summary>
+    /// 碰撞到技能触发器
+    /// </summary>
+    /// <param name="eConfig"></param>
+    /// <param name="trrigerObject"></param>
+    public void OnSkillTrriger(EConfig eConfig, GameObject trrigerObject)
+    {
+        bool isDestroy = false;
+        if (trrigerObject.CompareTag("Player"))
+        {
+            PlayerCtrl hitPlayerCtrl = trrigerObject.transform.GetComponent<PlayerCtrl>();
+            PlayerInfo hitPlayerInfo = hitPlayerCtrl.playerInfo;
+            if (hitPlayerInfo.TeamID != playerInfo.TeamID)
+            {
+                hitPlayerCtrl.OnSkillHit(50);
+                if (eConfig.destroyMode == DestroyMode.OnHit_DifferentCampPlayer || eConfig.destroyMode == DestroyMode.OnHit_AllPlayer)
+                {
+                    isDestroy = true;
+                    //并且销毁
+                    Destroy(eConfig.gameObject);
+                }
+            }
+            else
+            {
+                //如果是同个阵营的
+                return;
+            }
+        }
+        ////野怪
+        //else if (trrigerObject.CompareTag("Monster"))
+        //{
+        //    //让他扣血 并且让它进入对应的状态
+        //}
+        ////兵
+        //else if (trrigerObject.CompareTag("Soldier"))
+        //{
+        //    //如果不是同个阵营 让他扣血 并且让它进入对应的状态
+        //}
+        ////防御塔或者水晶
+        //else if (trrigerObject.CompareTag("Tower"))
+        //{
+        //    //如果不是同个阵营 让他扣血 并且让它进入对应的状态
+        //}
+        ////水晶
+        //else if (trrigerObject.CompareTag("Crystal"))
+        //{
+        //    //如果不是同个阵营 让他扣血 并且让它进入对应的状态
+        //}
+
+        //克隆爆炸特效
+        if (isDestroy && eConfig.hitLoad != null)
+        {
+            //克隆爆炸物
+            GameObject hitObj = GameObject.Instantiate(eConfig.hitLoad);
+            hitObj.transform.position = this.transform.position;
+            //hitObj.transform.eulerAngles=
+        }
+    }
+
+    /// <summary>
+    /// 受到技能伤害减血
+    /// </summary>
+    /// <param name="hurt"></param>
+    private void OnSkillHit(int hurt)
+    {
+        currentAttribute.HP -= hurt;
+        if (currentAttribute.HP<=0)
+        {
+            currentAttribute.HP = 0;
+            HUDUpdate();
+            //进入到死亡状态
+            playerFSM.ToNext(FSMState.Dead);
+        }
+        else
+        {
+            HUDUpdate();
         }
     }
 
