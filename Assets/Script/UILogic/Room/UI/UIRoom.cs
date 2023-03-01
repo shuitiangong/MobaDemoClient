@@ -99,7 +99,7 @@ public class UIRoom : UIBase
             if (!ct.IsCancellationRequested)
             {
                 nowTime--;
-                time.text = $"倒计时：{time}";
+                time.text = $"倒计时：{nowTime}";
             }
         }
     }

@@ -47,6 +47,8 @@ public class PlayerCtrl : MonoBehaviour
         MPText = hud.transform.Find("MP/Text").GetComponent<Text>();
         nickNameText = hud.transform.Find("NickName").GetComponent<Text>();
         levelText = hud.transform.Find("Level/Text").GetComponent<Text>();
+        //Debug.Log($"{playerInfo.RolesInfo.NickName}");
+        nickNameText.text = playerInfo.RolesInfo.NickName;
         //技能管理器
         skillMgr = this.gameObject.AddComponent<SkillMgr>();
         skillMgr.Init(this);
@@ -154,7 +156,6 @@ public class PlayerCtrl : MonoBehaviour
         HPText.text = $"{currentAttribute.HP}/{totalAttribute.HP}";
         MPText.text = $"{currentAttribute.MP}/{totalAttribute.MP}";
         levelText.text = currentAttribute.Level.ToString();
-        nickNameText.text = playerInfo.RolesInfo.NickName;
 
         if (init)
         {
